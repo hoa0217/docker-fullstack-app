@@ -1,25 +1,26 @@
-version: "2.4"
+version: "3"
 services:
   frontend:
-    image: jeonghwaheo/docker-frontend
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
     volumes:
       - /app/node_modules
       - ./frontend:/app
     stdin_open: true
-    mem_limit: 128m
 
   nginx:
     restart: always
-    image: jeonghwaheo/docker-nginx
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
     ports:
-      - "80:80"
-    mem_limit: 128m
-    links:
-      - frontend
-      - backend
+      - "3000:80"
 
   backend:
-    image: jeonghwaheo/docker-backend
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./backend
     container_name: app_backend
     volumes:
       - /app/node_modules
@@ -30,4 +31,3 @@ services:
       MYSQL_ROOT_PASSWORD: ^happyhouse123
       MYSQL_DATABASE: myapp
       MYSQL_PORT: 3306
-    mem_limit: 128m
