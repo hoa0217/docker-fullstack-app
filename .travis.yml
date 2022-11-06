@@ -15,7 +15,7 @@ after_success:
   - docker build -t jeonghwaheo/docker-frontend ./frontend
   - docker build -t jeonghwaheo/docker-backend ./backend
   - docker build -t jeonghwaheo/docker-nginx ./nginx
-  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "DOCKER_HUB_ID" --password-stdin
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
   - docker push jeonghwaheo/docker-frontend
   - docker push jeonghwaheo/docker-backend
   - docker push jeonghwaheo/docker-nginx
